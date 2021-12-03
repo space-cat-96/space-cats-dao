@@ -1,0 +1,13 @@
+[programs.localnet]
+space_cats_dao = "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+# cluster = "localnet"
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn test"

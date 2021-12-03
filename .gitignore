@@ -1,0 +1,10 @@
+.env
+.anchor
+.DS_Store
+.vscode
+keys
+target
+**/*.rs.bk
+node_modules
+test-ledger
+backend/.node-persist

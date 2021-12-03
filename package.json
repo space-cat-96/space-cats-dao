@@ -1,0 +1,17 @@
+{
+  "name": "space-cats-dao",
+  "version": "0.0.1",
+  "description": "Space Cats DAO",
+  "private": true,
+  "scripts": {
+    "setup": "mkdir keys",
+    "test": "cd test && yarn test",
+    "init:contract": "cd test && yarn init:contract",
+    "create:posts": "cd test && yarn create:posts",
+    "idl": "cp target/types/space_cats_dao.ts frontend/src && cp target/idl/space_cats_dao.json frontend/src ",
+    "dev": "anchor test --skip-local-validator"
+  },
+  "dependencies": {
+    "@project-serum/anchor": "^0.18.0"
+  }
+}
