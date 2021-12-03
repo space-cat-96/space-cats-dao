@@ -211,8 +211,9 @@ class ProgramUtil {
   private async airdropGarbageCollectorAddress() {
     const garbageCollector = this.garbageCollector;
     if (garbageCollector !== null) {
-      const localhost = "http://127.0.0.1:8899";
-      const connection = new Connection(localhost);
+      // const localhost = "http://127.0.0.1:8899";
+      const devnet = "https://api.devnet.solana.com";
+      const connection = new Connection(devnet);
       const address = garbageCollector.publicKey;
       const signature = await connection.requestAirdrop(address, 50_000_000);
       await connection.confirmTransaction(signature);

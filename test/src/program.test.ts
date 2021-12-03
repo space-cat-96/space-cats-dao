@@ -9,7 +9,7 @@ jest.setTimeout(300_000); // 5 minutes
  * - Creating posts.
  * - Creating author accounts and updating their profiles.
  */
-describe("Solis", () => {
+describe("Space Cats DAO", () => {
   /**
    * This test takes a long time because it needs to create up to ~250 posts,
    * so it is skipped under normal conditions.

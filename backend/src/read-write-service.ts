@@ -142,7 +142,7 @@ export class ReadWriteService {
    * new incoming posts and write them to Arweave.
    */
   initSolanaAccountListener = async () => {
-    this.program = anchor.workspace.Solis as Program<SpaceCatsDao>;
+    this.program = anchor.workspace.SpaceCatsDao as Program<SpaceCatsDao>;
 
     const storageAccount = this.programUtil.getStorageAccountPubkey();
     const eventEmitter = this.program.account.storageAccount.subscribe(

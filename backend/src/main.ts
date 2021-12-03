@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Solis Backend Online.");
+  res.send("Space Cats DAO Backend Online.");
 });
 
 // This API returns this cached post history. Posts are fetched and cached in

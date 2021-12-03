@@ -5,10 +5,11 @@
   "repository": "",
   "private": true,
   "scripts": {
-    "clean": "shx rm -rf build/*",
+    "clean": "rm -rf build/*",
     "start": "craco start",
-    "build": "yarn clean && craco build",
     "test": "craco test",
+    "build": "yarn clean && craco build",
+    "deploy": "surge --project ./build --domain space-cats-dao.surge.sh",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "files": [
