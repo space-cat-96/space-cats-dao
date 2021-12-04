@@ -2,14 +2,22 @@ import fs from "fs";
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
 import { SpaceCatsDao } from "../../target/types/space_cats_dao";
+import IDL from "../../target/idl/space_cats_dao.json";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import { getRandomText, wait } from "./utils";
 
 const { SystemProgram } = anchor.web3;
-const program = anchor.workspace.SpaceCatsDao as Program<SpaceCatsDao>;
 
-const provider = anchor.Provider.local();
+const devnet = "https://api.devnet.solana.com";
+const provider = anchor.Provider.local(devnet);
 anchor.setProvider(provider);
+
+const programID = "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs";
+const program = new Program(
+  IDL as anchor.Idl,
+  programID,
+  provider
+) as unknown as Program<SpaceCatsDao>;
 
 interface RawPost {
   content: number[];

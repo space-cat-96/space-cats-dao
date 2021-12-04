@@ -58,15 +58,20 @@ export class ReadWriteService {
    * which cannot run in the constructor.
    */
   init = async (io: Socket) => {
-    this.socket = io;
+    try {
+      this.socket = io;
 
-    const testWeave = await TestWeave.init(this.arweave);
-    this.testWeave = testWeave;
+      const testWeave = await TestWeave.init(this.arweave);
+      this.testWeave = testWeave;
 
-    await this.initArweaveWallet();
-    await this.initSolanaAccountListener();
-    await this.initializePosts();
-    await this.garbageCollectionCheckpoint();
+      await this.initArweaveWallet();
+      await this.initSolanaAccountListener();
+      await this.initializePosts();
+      await this.garbageCollectionCheckpoint();
+    } catch (err) {
+      console.log("Init Error:");
+      console.log(err);
+    }
   };
 
   getPostHistory() {
