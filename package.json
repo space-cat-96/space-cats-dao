@@ -5,9 +5,8 @@
   "private": true,
   "scripts": {
     "frontend": "cd frontend && yarn start",
-    "_build": "cd backend && yarn build",
-    "postinstall": "yarn install --prefix backend && yarn build --prefix backend",
-    "start": "cd backend && yarn start",
+    "backend:build": "cd backend && yarn build",
+    "backend": "cd backend && yarn start",
     "setup": "mkdir keys",
     "test": "cd test && yarn test",
     "init:contract": "cd test && yarn init:contract",
