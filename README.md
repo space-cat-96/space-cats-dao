@@ -10,10 +10,10 @@ The code here is organized as follows:
 
 ```md
 .
-├── backend # Backend NodeJS read/write service
-├── frontend # Client application
-├── programs # Solana program source code
-├── test # Solana program tests and helper scripts
+├── backend         # Backend NodeJS read/write service
+├── frontend        # Client application
+├── programs        # Solana program source code
+├── test            # Solana program tests and helper scripts
 └── README.md
 ```
 
