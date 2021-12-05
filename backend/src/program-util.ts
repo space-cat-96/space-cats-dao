@@ -17,7 +17,6 @@ const program = new Program(
   programID,
   provider
 ) as unknown as Program<SpaceCatsDao>;
-console.log(program);
 
 interface RawPost {
   content: number[];

@@ -148,9 +148,6 @@ export class ReadWriteService {
    */
   initSolanaAccountListener = async () => {
     this.program = anchor.workspace.SpaceCatsDao as Program<SpaceCatsDao>;
-    // console.log(anchor.workspace.SpaceCatsDao);
-    // console.log("---------------------------");
-    // console.log(this.program);
 
     const storageAccount = this.programUtil.getStorageAccountPubkey();
     const eventEmitter = this.program.account.storageAccount.subscribe(
