@@ -182,5 +182,5 @@ const BottomLeft = styled.div`
   position: fixed;
   bottom: 15px;
   left: 15px;
-  display: none;
+  /* display: none; */
 `;

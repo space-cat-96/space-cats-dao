@@ -11,7 +11,7 @@ import programUtil from "./program-util";
  * Adjust the LIMIT value below to change how many posts are created.
  */
 const main = async () => {
-  const LIMIT = 10;
+  const LIMIT = 3;
   console.log(`- Creating ${LIMIT} authors and posts...`);
   await programUtil.createRandomPosts(LIMIT, true);
   console.log("\n - Done!");

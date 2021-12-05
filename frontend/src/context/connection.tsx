@@ -7,7 +7,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import idl from "../space_cats_dao.json";
 import { programID } from "../tools/web3";
 
-const DEFAULT_NETWORK = networks[3];
+const DEFAULT_NETWORK = networks[1];
 
 export type ConnectionContextType = {
   network: Network;
@@ -17,12 +17,13 @@ export type ConnectionContextType = {
   handleSetNetwork: (network: Network) => void;
 };
 
-const localhost = "http://127.0.0.1:8899";
+// const localhost = "http://127.0.0.1:8899";
+const devnet = "https://api.devnet.solana.com";
 
 export const ConnectionContext = createContext<ConnectionContextType>({
   networks,
   network: DEFAULT_NETWORK,
-  connection: new Connection(localhost),
+  connection: new Connection(devnet),
   handleSetNetwork: () => {},
   handleSetConnection: () => {},
 });

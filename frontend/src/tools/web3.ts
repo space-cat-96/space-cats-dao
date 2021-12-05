@@ -6,7 +6,7 @@ import { Connection, PublicKey, SystemProgram } from "@solana/web3.js";
 import { ProgramType } from "../context/connection";
 
 export const programID = new PublicKey(
-  "DNsNdfzGUkKt9y8i2Y8dqx1r6ATCbouK84TcfRmEYpPz"
+  "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs"
 );
 
 export interface Post {
@@ -23,7 +23,7 @@ class ProgramUtil {
   storageAccount: PublicKey;
   constructor() {
     this.storageAccount = new PublicKey(
-      "DCBxrxwWaeazt95cs9DLvwLzXsA3sGim2ckAHgjFgjgR"
+      "77A79h1TVdZGyGDpADKKBr5DYjsRmYAEcdh8chhqqPRn"
     );
   }
 
@@ -174,9 +174,9 @@ class ProgramUtil {
   }
 
   public async fetchPostHistory() {
-    const response = await axios.get<ArweavePost[]>(
-      "http://localhost:8787/posts"
-    );
+    // const local = "http://localhost:8787/posts";
+    const backend = "http://144.126.220.129:8080/posts";
+    const response = await axios.get<ArweavePost[]>(backend);
     const result = response.data;
     return result;
   }

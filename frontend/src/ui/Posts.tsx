@@ -28,7 +28,8 @@ const { TextArea } = Input;
 
 export const Posts: FC = () => {
   const ws = useRef<Socket>(
-    io("ws://localhost:8787", { reconnectionAttempts: 3 })
+    // io("ws://localhost:8787", { reconnectionAttempts: 3 })
+    io("ws://144.126.220.129:8080", { reconnectionAttempts: 3 })
   );
   const { publicKey, sendTransaction, connected } = useWallet();
   const { connection } = useConnection();

@@ -78,7 +78,7 @@ $ cd backend && yarn start
 9. Run a script to create posts:
 
 ```sh
-$ yarn seed
+$ yarn create:posts
 ```
 
 10. Run the frontend client:
