@@ -23,13 +23,13 @@ import {
   formatPublicKey,
   toDateString,
 } from "../tools/utils";
+import { SERVER_CONFIG } from "../tools/constants";
 
 const { TextArea } = Input;
 
 export const Posts: FC = () => {
   const ws = useRef<Socket>(
-    // io("ws://localhost:8787", { reconnectionAttempts: 3 })
-    io("wss://space-cats-dao-backend.com", { reconnectionAttempts: 3 })
+    io(`${SERVER_CONFIG.socket}`, { reconnectionAttempts: 3 })
   );
   const { publicKey, sendTransaction, connected } = useWallet();
   const { connection } = useConnection();

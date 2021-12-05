@@ -4,6 +4,7 @@ import { Program } from "@project-serum/anchor";
 import { BaseSignerWalletAdapter } from "@solana/wallet-adapter-base";
 import { Connection, PublicKey, SystemProgram } from "@solana/web3.js";
 import { ProgramType } from "../context/connection";
+import { SERVER_CONFIG } from "./constants";
 
 export const programID = new PublicKey(
   "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs"
@@ -174,9 +175,7 @@ class ProgramUtil {
   }
 
   public async fetchPostHistory() {
-    // TODO: Move to single variable.
-    // const local = "http://localhost:8787/posts";
-    const backend = "https://space-cats-dao-backend.com/posts";
+    const backend = `${SERVER_CONFIG.backend}/posts`;
     const response = await axios.get<ArweavePost[]>(backend);
     const result = response.data;
     return result;
