@@ -157,21 +157,25 @@ export class ReadWriteService {
    * new incoming posts and write them to Arweave.
    */
   initSolanaAccountListener = async () => {
-    setInterval(() => {
-      console.log("- Adding account change listener.");
+    // Initialize account listener
+    await this.addAccountListener();
 
-      this.eventEmitter = null;
+    // Reset account listener every 15 minutes
+    setInterval(this.addAccountListener, 1000 * 60 * 15);
+  };
 
-      const storageAccount = this.programUtil.getStorageAccountPubkey();
-      const eventEmitter = this.program.account.storageAccount.subscribe(
-        storageAccount,
-        "confirmed"
-      );
+  addAccountListener = async () => {
+    this.eventEmitter = null;
 
-      eventEmitter.on("change", this.handleOnAccountChange);
+    console.log("- Subscribing to storageAccount changes.");
+    const storageAccount = this.programUtil.getStorageAccountPubkey();
+    const eventEmitter = this.program.account.storageAccount.subscribe(
+      storageAccount,
+      "confirmed"
+    );
 
-      this.eventEmitter = eventEmitter;
-    }, 1000 * 60 * 15);
+    eventEmitter.on("change", this.handleOnAccountChange);
+    this.eventEmitter = eventEmitter;
   };
 
   /**
