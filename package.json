@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "frontend": "cd frontend && yarn start",
-    "backend:build": "cd backend && yarn build",
-    "backend": "cd backend && yarn start",
+    "build": "cd backend && yarn build",
+    "start": "cd backend && yarn start",
     "setup": "mkdir keys",
     "test": "cd test && yarn test",
     "init:contract": "cd test && yarn init:contract",
