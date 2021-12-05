@@ -57,14 +57,14 @@ export const Posts: FC = () => {
     }
   }, [connected]);
 
-  const handleFetchCurrentPosts = async (program: ProgramType | null) => {
+  const handleFetchCurrentPosts = async () => {
     const state = await programUtil.fetchPostHistory();
     setPosts(state);
   };
 
-  useMemo(() => {
-    handleFetchCurrentPosts(program);
-  }, [program]);
+  useEffect(() => {
+    handleFetchCurrentPosts();
+  }, []);
 
   const handleFetchAuthorStateAccount = async (
     program: ProgramType | null,
@@ -122,7 +122,7 @@ export const Posts: FC = () => {
         message: "Post created!",
         placement: "bottomRight",
       });
-      await handleFetchCurrentPosts(program);
+      await handleFetchCurrentPosts();
     }
   };
 
