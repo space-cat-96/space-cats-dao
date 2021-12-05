@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "ts-node src/main.ts",
-    "build": "npx -p typescript tsc",
+    "_build": "npx -p typescript tsc",
+    "build": "tsc",
     "start": "node dist/backend/src/main.js",
     "deploy": "yarn install && yarn build",
     "test": "jest --runInBand --detectOpenHandles"
