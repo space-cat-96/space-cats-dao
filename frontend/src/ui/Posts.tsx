@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import io, { Socket } from "socket.io-client";
 import styled from "styled-components";
-import { List } from "react-virtualized";
+import { AutoSizer, List } from "react-virtualized";
 import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 import Jazzicon from "react-jazzicon";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -128,24 +128,28 @@ export const Posts: FC = () => {
 
   return (
     <PostsContainer>
-      {connected ? (
-        !authorAccountExists ? (
-          <WalletBox>
-            <p>Create an account to post. Account data is stored on-chain.</p>
-            <Button type="primary" onClick={handleCreateAuthorAccount}>
-              Create Account
-            </Button>
-          </WalletBox>
+      <div>
+        {connected ? (
+          !authorAccountExists ? (
+            <WalletBox>
+              <p>Create an account to post. Account data is stored on-chain.</p>
+              <Button type="primary" onClick={handleCreateAuthorAccount}>
+                Create Account
+              </Button>
+            </WalletBox>
+          ) : (
+            <TextareaContainer handleCreatePost={handleCreatePost} />
+          )
         ) : (
-          <TextareaContainer handleCreatePost={handleCreatePost} />
-        )
-      ) : (
-        <WalletBox>
-          <p>Connect your wallet to get started.</p>
-          <WalletMultiButton type="primary" />
-        </WalletBox>
-      )}
-      <PostsList posts={posts} />
+          <WalletBox>
+            <p>Connect your wallet to get started.</p>
+            <WalletMultiButton type="primary" />
+          </WalletBox>
+        )}
+        <Parent>
+          <PostsList posts={posts} />
+        </Parent>
+      </div>
     </PostsContainer>
   );
 };
@@ -158,7 +162,7 @@ const PostsList: FC<PostsListProps> = (props: PostsListProps) => {
   const rowRenderer = ({ index, key, style }: any) => {
     const x = props.posts[index];
     return (
-      <div key={key} style={style}>
+      <div key={key} style={{ ...style }}>
         <Card style={{ height: 201 }}>
           <AuthorBioRow>
             <AuthorBio
@@ -191,14 +195,20 @@ const PostsList: FC<PostsListProps> = (props: PostsListProps) => {
   };
 
   return (
-    <List
-      rowCount={props.posts.length}
-      width={500}
-      height={585}
-      rowHeight={205}
-      overscanRowCount={25}
-      rowRenderer={rowRenderer}
-    />
+    <AutoSizer>
+      {({ height, width }) => {
+        return (
+          <List
+            rowCount={props.posts.length}
+            width={width}
+            height={height}
+            rowHeight={205}
+            overscanRowCount={25}
+            rowRenderer={rowRenderer}
+          />
+        );
+      }}
+    </AutoSizer>
   );
 };
 
@@ -222,8 +232,10 @@ const TextareaContainer: FC<IProps> = (props: IProps) => {
   return (
     <InputContainer>
       <TitleText>
-        It's very cheap to transact on Solana. Go ahead, give it a try and post
-        a new message.
+        This app is running on the Solana Devnet and a local Arweave TestWeave.
+        Messages are posted to Solana and then written to Arweave for long-term
+        stored. A backend server handles writing data to Arweave and indexing
+        post history for the app to view.
       </TitleText>
       <StyledTextarea
         rows={textareaFocused || post !== "" ? 3 : 1}
@@ -255,12 +267,6 @@ const TextareaContainer: FC<IProps> = (props: IProps) => {
  */
 
 const PostsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 508px;
-  margin: auto;
   padding-top: 65px;
   padding-bottom: 25px;
 `;
@@ -291,6 +297,7 @@ const AuthorBio = styled.div`
 const Card = styled.div`
   display: flex;
   margin-bottom: 4px;
+  margin: auto;
   padding: 18px;
   width: 500px;
   justify-content: center;
@@ -354,13 +361,20 @@ const TitleText = styled.p`
 `;
 
 const WalletBox = styled(Card)`
+  margin: auto;
   margin-top: 15px;
   margin-bottom: 8px;
   width: 500px;
 `;
 
 const InputContainer = styled.div`
+  margin: auto;
   margin-top: 15px;
   margin-bottom: 8px;
   width: 500px;
+`;
+
+const Parent = styled.div`
+  flex: 1;
+  height: 100vh;
 `;

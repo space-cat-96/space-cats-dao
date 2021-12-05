@@ -174,6 +174,7 @@ class ProgramUtil {
   }
 
   public async fetchPostHistory() {
+    // TODO: Move to single variable.
     // const local = "http://localhost:8787/posts";
     const backend = "https://space-cats-dao-backend.com/posts";
     const response = await axios.get<ArweavePost[]>(backend);
