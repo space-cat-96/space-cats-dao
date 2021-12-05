@@ -4,7 +4,9 @@
   "description": "Space Cats DAO Backend",
   "private": true,
   "scripts": {
-    "start": "ts-node src/main.ts",
+    "dev": "ts-node src/main.ts",
+    "build": "tsc",
+    "start": "node dist/backend/src/main.js",
     "test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {

@@ -4,6 +4,7 @@
     "typeRoots": ["./node_modules/@types"],
     "lib": ["es2017", "dom"],
     "module": "commonjs",
+    "outDir": "dist",
     "target": "es6",
     "strict": true,
     "resolveJsonModule": true,
