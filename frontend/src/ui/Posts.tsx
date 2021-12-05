@@ -134,7 +134,7 @@ export const Posts: FC = () => {
             This app is running on the Solana Devnet and uses a local Arweave
             TestWeave network. Messages are posted to Solana and then written to
             Arweave for long-term storage. A backend server handles writing data
-            to Arweave and indexing post history. View the{" "}
+            to Arweave and indexing post history. View the project{" "}
             <a
               target="blank"
               href="https://github.com/space-cat-96/space-cats-dao"
@@ -255,7 +255,7 @@ const TextareaContainer: FC<IProps> = (props: IProps) => {
         placeholder="Write the uncensored future..."
       />
       <PostButtonRow>
-        <Limit>{post.length}/169</Limit>
+        <Limit />
         <div>
           <Button
             type="primary"

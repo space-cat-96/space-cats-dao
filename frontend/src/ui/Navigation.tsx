@@ -90,6 +90,10 @@ export const Navigation: FC = () => {
         {publicKey && (
           <StyledButton
             onClick={async () => {
+              notification.info({
+                message: "Airdropping 1 SOL",
+                placement: "bottomRight",
+              });
               await programUtil.requestAirdrop(publicKey, connection);
               notification.success({
                 message: "Airdrop Successful",

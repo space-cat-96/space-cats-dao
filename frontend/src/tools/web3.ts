@@ -10,6 +10,12 @@ export const programID = new PublicKey(
   "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs"
 );
 
+export const storageAccount = new PublicKey(
+  "77A79h1TVdZGyGDpADKKBr5DYjsRmYAEcdh8chhqqPRn"
+);
+
+type SendTransactionFn = BaseSignerWalletAdapter["sendTransaction"];
+
 export interface Post {
   content: string;
   author: string;
@@ -22,16 +28,15 @@ export interface ArweavePost extends Post {
 
 class ProgramUtil {
   storageAccount: PublicKey;
+
   constructor() {
-    this.storageAccount = new PublicKey(
-      "77A79h1TVdZGyGDpADKKBr5DYjsRmYAEcdh8chhqqPRn"
-    );
+    this.storageAccount = storageAccount;
   }
 
   public generateKeyPair = () => anchor.web3.Keypair.generate();
 
   public async requestAirdrop(address: PublicKey, connection: Connection) {
-    const signature = await connection.requestAirdrop(address, 10_000_000);
+    const signature = await connection.requestAirdrop(address, 1_000_000_000);
     await connection.confirmTransaction(signature);
   }
 
@@ -76,7 +81,7 @@ class ProgramUtil {
     program: ProgramType,
     connection: Connection,
     author: PublicKey,
-    sendTransaction: BaseSignerWalletAdapter["sendTransaction"]
+    sendTransaction: SendTransactionFn
   ) {
     try {
       const { bump, authorAccount } = await this.getAuthorAccount(
@@ -110,7 +115,7 @@ class ProgramUtil {
     author: PublicKey,
     program: ProgramType,
     connection: Connection,
-    sendTransaction: BaseSignerWalletAdapter["sendTransaction"]
+    sendTransaction: SendTransactionFn
   ) {
     try {
       const { bump, authorAccount } = await this.getAuthorAccount(
@@ -135,7 +140,7 @@ class ProgramUtil {
       tx.recentBlockhash = blockhash;
 
       const result = await sendTransaction(tx, connection);
-      const final = await connection.confirmTransaction(result, "confirmed");
+      const final = await connection.confirmTransaction(result, "processed");
       return final;
     } catch (err) {
       console.log("updateAuthorProfile Error: ", err);
@@ -147,7 +152,7 @@ class ProgramUtil {
     connection: Connection,
     author: PublicKey,
     message: string,
-    sendTransaction: BaseSignerWalletAdapter["sendTransaction"]
+    sendTransaction: SendTransactionFn
   ) {
     try {
       const { bump, authorAccount } = await this.getAuthorAccount(
@@ -167,7 +172,7 @@ class ProgramUtil {
       tx.recentBlockhash = blockhash;
 
       const result = await sendTransaction(tx, connection);
-      const final = await connection.confirmTransaction(result, "finalized");
+      const final = await connection.confirmTransaction(result, "processed");
       return final;
     } catch (err) {
       console.log("createPost Error: ", err);

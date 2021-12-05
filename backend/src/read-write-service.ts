@@ -165,7 +165,7 @@ export class ReadWriteService {
   };
 
   addAccountListener = async () => {
-    this.eventEmitter = null;
+    this.eventEmitter?.removeAllListeners();
 
     console.log("- Subscribing to storageAccount changes.");
     const storageAccount = this.programUtil.getStorageAccountPubkey();

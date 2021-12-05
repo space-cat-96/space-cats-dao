@@ -12,6 +12,7 @@ export const Settings = () => {
       <div style={{ display: "grid" }}>
         Theme:{" "}
         <Select
+          disabled
           value={theme}
           onSelect={handleSetTheme}
           style={{ marginBottom: 20 }}
@@ -26,6 +27,7 @@ export const Settings = () => {
       <div style={{ display: "grid" }}>
         Network:{" "}
         <Select
+          disabled
           value={network.name}
           onSelect={(clusterName: ClusterName) => {
             const network = networks.find((x) => x.name === clusterName);
