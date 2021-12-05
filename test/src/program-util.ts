@@ -144,7 +144,7 @@ class ProgramUtil {
    */
   public async createRandomPosts(count: number, showLog = false) {
     for (let i = 0; i < count; i++) {
-      await wait();
+      await wait(200);
       const user = this.generateKeyPair();
       await this.createAuthor(user);
       const text = getRandomText();

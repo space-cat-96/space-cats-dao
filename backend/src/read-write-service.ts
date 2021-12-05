@@ -7,6 +7,7 @@ import TestWeave from "testweave-sdk";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
+import EventEmitter from "eventemitter3";
 import { SpaceCatsDao } from "../../target/types/space_cats_dao";
 import { CreateTransactionInterface } from "arweave/node/common";
 import { ArweavePost, CreatePostPayload, Post, RawPost } from "./types";
@@ -38,6 +39,7 @@ export class ReadWriteService {
   fileStore: LocalStorage;
   recentSavedPostHashes: string[] = [];
   garbageCollectionInProgress = false;
+  eventEmitter: EventEmitter | null = null;
 
   constructor() {
     this.fileStore = storage.create();
@@ -156,6 +158,8 @@ export class ReadWriteService {
     );
 
     eventEmitter.on("change", this.handleOnAccountChange);
+
+    this.eventEmitter = eventEmitter;
   };
 
   /**
