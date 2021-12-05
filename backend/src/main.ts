@@ -29,7 +29,8 @@ const launch = async () => {
   // Setup web socket for client/server communication
   const io: Socket = require("socket.io")(server, {
     cors: {
-      origin: "http://localhost:3001",
+      // origin: "http://localhost:3001",
+      origin: "https://space-cats-dao.surge.sh",
       methods: ["GET", "POST"],
     },
   });
