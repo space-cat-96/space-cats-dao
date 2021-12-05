@@ -182,5 +182,8 @@ const BottomLeft = styled.div`
   position: fixed;
   bottom: 15px;
   left: 15px;
-  /* display: none; */
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;

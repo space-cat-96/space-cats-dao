@@ -129,6 +129,21 @@ export const Posts: FC = () => {
   return (
     <PostsContainer>
       <div>
+        <TitleTextContainer>
+          <TitleText>
+            This app is running on the Solana Devnet and uses a local Arweave
+            TestWeave network. Messages are posted to Solana and then written to
+            Arweave for long-term storage. A backend server handles writing data
+            to Arweave and indexing post history. View the{" "}
+            <a
+              target="blank"
+              href="https://github.com/space-cat-96/space-cats-dao"
+            >
+              source code here
+            </a>
+            .
+          </TitleText>
+        </TitleTextContainer>
         {connected ? (
           !authorAccountExists ? (
             <WalletBox>
@@ -231,12 +246,6 @@ const TextareaContainer: FC<IProps> = (props: IProps) => {
 
   return (
     <InputContainer>
-      <TitleText>
-        This app is running on the Solana Devnet and a local Arweave TestWeave.
-        Messages are posted to Solana and then written to Arweave for long-term
-        stored. A backend server handles writing data to Arweave and indexing
-        post history for the app to view.
-      </TitleText>
       <StyledTextarea
         rows={textareaFocused || post !== "" ? 3 : 1}
         onFocus={() => setTextareaFocused(true)}
@@ -310,6 +319,10 @@ const Card = styled.div`
     background: rgba(5, 5, 5, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
+  @media (max-width: 480px) {
+    width: 95vw;
+  }
 `;
 
 const StyledTextarea = styled(TextArea)`
@@ -352,19 +365,33 @@ const Limit = styled.p`
   font-size: 13px;
 `;
 
+const TitleTextContainer = styled.div`
+  margin: auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  width: 500px;
+
+  @media (max-width: 480px) {
+    width: 95vw;
+  }
+`;
+
 const TitleText = styled.p`
   font-weight: 200;
   font-size: 14px;
   margin: 0;
   margin-left: 2px;
   margin-bottom: 8px;
+
+  a {
+    color: rgba(93, 82, 252, 0.75);
+  }
 `;
 
 const WalletBox = styled(Card)`
   margin: auto;
   margin-top: 15px;
   margin-bottom: 8px;
-  width: 500px;
 `;
 
 const InputContainer = styled.div`
@@ -372,6 +399,10 @@ const InputContainer = styled.div`
   margin-top: 15px;
   margin-bottom: 8px;
   width: 500px;
+
+  @media (max-width: 480px) {
+    width: 95vw;
+  }
 `;
 
 const Parent = styled.div`

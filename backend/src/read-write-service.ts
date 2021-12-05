@@ -29,7 +29,7 @@ const ArweaveTag = {
  * the Solana program.
  */
 export class ReadWriteService {
-  program: Program<SpaceCatsDao> | null = null;
+  program: Program<SpaceCatsDao>;
   programUtil = programUtil;
   jwk: JWKInterface | null = null;
   arweave: Arweave;
@@ -42,6 +42,8 @@ export class ReadWriteService {
   eventEmitter: EventEmitter | null = null;
 
   constructor() {
+    this.program = anchor.workspace.SpaceCatsDao as Program<SpaceCatsDao>;
+
     this.fileStore = storage.create();
 
     const arweave = Arweave.init({
@@ -77,6 +79,12 @@ export class ReadWriteService {
   };
 
   getPostHistory() {
+    console.log("- [DEBUG]: Checking eventEmitter listeners:");
+    if (this.eventEmitter) {
+      const listeners = this.eventEmitter.listeners("change");
+      console.log(listeners);
+    }
+
     return this.posts;
   }
 
@@ -149,17 +157,21 @@ export class ReadWriteService {
    * new incoming posts and write them to Arweave.
    */
   initSolanaAccountListener = async () => {
-    this.program = anchor.workspace.SpaceCatsDao as Program<SpaceCatsDao>;
+    setInterval(() => {
+      console.log("- Adding account change listener.");
 
-    const storageAccount = this.programUtil.getStorageAccountPubkey();
-    const eventEmitter = this.program.account.storageAccount.subscribe(
-      storageAccount,
-      "confirmed"
-    );
+      this.eventEmitter = null;
 
-    eventEmitter.on("change", this.handleOnAccountChange);
+      const storageAccount = this.programUtil.getStorageAccountPubkey();
+      const eventEmitter = this.program.account.storageAccount.subscribe(
+        storageAccount,
+        "confirmed"
+      );
 
-    this.eventEmitter = eventEmitter;
+      eventEmitter.on("change", this.handleOnAccountChange);
+
+      this.eventEmitter = eventEmitter;
+    }, 1000 * 60 * 15);
   };
 
   /**
