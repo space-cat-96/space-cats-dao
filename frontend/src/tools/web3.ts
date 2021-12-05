@@ -175,7 +175,7 @@ class ProgramUtil {
 
   public async fetchPostHistory() {
     // const local = "http://localhost:8787/posts";
-    const backend = "http://144.126.220.129:8080/posts";
+    const backend = "https://space-cats-dao-backend.com/posts";
     const response = await axios.get<ArweavePost[]>(backend);
     const result = response.data;
     return result;
