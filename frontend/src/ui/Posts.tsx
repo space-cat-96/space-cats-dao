@@ -58,10 +58,8 @@ export const Posts: FC = () => {
   }, [connected]);
 
   const handleFetchCurrentPosts = async (program: ProgramType | null) => {
-    if (program) {
-      const state = await programUtil.fetchPostHistory();
-      setPosts(state);
-    }
+    const state = await programUtil.fetchPostHistory();
+    setPosts(state);
   };
 
   useMemo(() => {
