@@ -14,6 +14,11 @@ export type SpaceCatsDao = {
           "name": "garbageCollector",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
         }
       ],
       "args": []
@@ -225,6 +230,13 @@ export type SpaceCatsDao = {
           }
         ]
       }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "InvalidUpgradeAuthority",
+      "msg": "Only the program upgrade authority can set the storage account."
     }
   ]
 };
@@ -245,6 +257,11 @@ export const IDL: SpaceCatsDao = {
           "name": "garbageCollector",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
         }
       ],
       "args": []
@@ -456,6 +473,13 @@ export const IDL: SpaceCatsDao = {
           }
         ]
       }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "InvalidUpgradeAuthority",
+      "msg": "Only the program upgrade authority can set the storage account."
     }
   ]
 };

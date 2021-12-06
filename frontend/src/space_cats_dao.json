@@ -14,6 +14,11 @@
           "name": "garbageCollector",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
         }
       ],
       "args": []
@@ -226,5 +231,15 @@
         ]
       }
     }
-  ]
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "InvalidUpgradeAuthority",
+      "msg": "Only the program upgrade authority can set the storage account."
+    }
+  ],
+  "metadata": {
+    "address": "76cyyWGTHNmt8ruNohBDYYv86q5HZcgvwRi8GayVLjUs"
+  }
 }
