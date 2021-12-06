@@ -6,19 +6,16 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
   background: rgb(21, 21, 24);
-  /* background: radial-gradient(
-    circle,
-    rgba(21, 21, 24, 1) 0%,
-    rgba(29, 26, 43, 1) 42%,
-    rgba(10, 5, 29, 1) 87%
-  ); */
-
   background: radial-gradient(
     circle,
     rgb(24, 24, 27) 0%,
     rgb(27, 24, 43) 50%,
     rgba(10, 5, 29, 1) 85%
   );
+
+  @media (max-width: 480px) {
+    background: rgb(21, 21, 24);
+  }
 }
 
 a {
