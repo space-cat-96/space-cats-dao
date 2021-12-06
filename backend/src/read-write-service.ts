@@ -79,12 +79,6 @@ export class ReadWriteService {
   };
 
   getPostHistory() {
-    console.log("- [DEBUG]: Checking eventEmitter listeners:");
-    if (this.eventEmitter) {
-      const listeners = this.eventEmitter.listeners("change");
-      console.log(listeners);
-    }
-
     return this.posts;
   }
 
@@ -160,7 +154,9 @@ export class ReadWriteService {
     // Initialize account listener
     await this.addAccountListener();
 
-    // Reset account listener every 15 minutes
+    // Reset account listener every 15 minutes. It seems there was a bug
+    // where this listener would fail after some time. Not sure why. Setting
+    // an interval here recreates it periodically and seems to fix the issue.
     setInterval(this.addAccountListener, 1000 * 60 * 15);
   };
 
