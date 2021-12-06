@@ -8,16 +8,16 @@ This was built for learning/experimental purposes. The code is not necessarily r
 
 ### Architecture
 
-This repository is a twitter clone built using Solana and Arweave. Solana stores user accounts and initial post data directly on chain. Posts are then stored permanently using Arweave. An off-chain (centralized) read/write service handles reading post data from Solana and writing it to Arweave. This service indexes post history to serve to clients quickly
+This repository is a twitter clone built using Solana and Arweave. Solana stores user accounts and initial post data directly on chain. Posts are then stored permanently using Arweave. An off-chain (centralized) read/write service handles reading post data from Solana and writing it to Arweave. This service subscribes to account changes from Solana, posts data to Arweave whenever new posts appear, and indexes the post history to serve quickly to clients. Periodically, this service also garbage collects the initial post data from the Solana account.
 
 The code here is organized as follows:
 
 ```md
 .
 ├── backend         # Backend NodeJS read/write service
-├── frontend        # Client application
+├── frontend        # Client ReactJS application
 ├── programs        # Solana program source code
-├── test            # Solana program tests and helper scripts
+├── test            # Solana program tests/helper scripts
 └── README.md
 ```
 
