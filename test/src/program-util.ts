@@ -8,6 +8,7 @@ import { getRandomText, wait } from "./utils";
 
 const { SystemProgram } = anchor.web3;
 
+// const localnet = "http://localhost:8899";
 const devnet = "https://api.devnet.solana.com";
 const provider = anchor.Provider.local(devnet);
 anchor.setProvider(provider);
@@ -213,6 +214,7 @@ class ProgramUtil {
       if (storageAccount !== null && garbageCollector !== null) {
         await program.rpc.createStorageAccount({
           accounts: {
+            admin: program.provider.wallet.publicKey,
             storageAccount: storageAccount.publicKey,
             garbageCollector: garbageCollector.publicKey,
           },

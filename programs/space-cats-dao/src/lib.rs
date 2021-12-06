@@ -16,6 +16,17 @@ pub mod space_cats_dao {
 
     // Handle creating a storage account and assigning a garbage collector address.
     pub fn create_storage_account(ctx: Context<CreateStorageAccount>) -> ProgramResult {
+        // I want to enforce this with a constraint but I don't know how to reference
+        // the program's upgrade authority in a constraint. Just hard-coding the
+        // address here. Either the storage account can be reset by the upgrade
+        // authority, or perhaps it cannot be changed. But there needs to be some
+        // validation to prevent anyone from changing the storage account.
+        let upgrade_authority = "7dJwaud74UAoqbxt5EJqENRVXsV63HvmvniYgPhic7gg";
+        let admin_key = ctx.accounts.admin.key;
+        if admin_key.to_string() != upgrade_authority {
+            return Err(StorageAccountError::InvalidUpgradeAuthority.into());
+        }
+
         let storage_account = &mut ctx.accounts.storage_account.load_init()?;
         storage_account.garbage_collector = *ctx.accounts.garbage_collector.key;
 
@@ -73,4 +84,10 @@ pub mod space_cats_dao {
 
         Ok(())
     }
+}
+
+#[error]
+pub enum StorageAccountError {
+    #[msg("Only the program upgrade authority can set the storage account.")]
+    InvalidUpgradeAuthority,
 }

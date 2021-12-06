@@ -12,6 +12,13 @@ pub struct CreateStorageAccount<'info> {
 
     #[account()]
     pub garbage_collector: Signer<'info>,
+
+    // Admin account represents the upgrade authority on the program and is used
+    // to control who can create this storage account, i.e. only the address
+    // which has upgrade rights to the program itself. I'd like to enforce this
+    // with a constraint here but couldn't figure out how.
+    #[account()]
+    pub admin: Signer<'info>,
 }
 
 #[derive(Accounts)]
