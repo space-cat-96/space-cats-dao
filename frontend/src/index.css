@@ -12,8 +12,10 @@ body {
     rgb(27, 24, 43) 50%,
     rgba(10, 5, 29, 1) 85%
   );
+}
 
-  @media (max-width: 480px) {
+@media (max-width: 480px) {
+  body {
     background: rgb(21, 21, 24);
   }
 }
