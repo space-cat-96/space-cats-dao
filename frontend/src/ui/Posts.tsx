@@ -131,10 +131,10 @@ export const Posts: FC = () => {
       <div>
         <TitleTextContainer>
           <TitleText>
-            This app is running on the Solana Devnet and uses a local Arweave
-            TestWeave network. Messages are posted to Solana and then written to
-            Arweave for long-term storage. A backend server handles writing data
-            to Arweave and indexing post history. View the project{" "}
+            This app is running on the Solana Devnet and Arweave TestWeave
+            network. Messages are posted to Solana and then written to Arweave
+            for long-term storage. An off-chain backend service handles writing
+            data to Arweave and indexing post history. View the project{" "}
             <a
               target="blank"
               href="https://github.com/space-cat-96/space-cats-dao"
@@ -252,7 +252,7 @@ const TextareaContainer: FC<IProps> = (props: IProps) => {
         onBlur={() => setTextareaFocused(false)}
         value={post}
         onChange={handleSetPost}
-        placeholder="Write the uncensored future..."
+        placeholder="Add your own thoughts to the hundreds of random Latin posts below..."
       />
       <PostButtonRow>
         <Limit />
