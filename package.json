@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "frontend": "cd frontend && yarn start",
+    "frontend:build": "cd frontend && yarn build",
+    "frontend:deploy": "cd frontend && yarn deploy",
     "backend:build": "cd backend && yarn build",
     "backend": "cd backend && yarn start",
     "test": "cd test && yarn test",
