@@ -84,9 +84,9 @@ export class ReadWriteService {
 
   debug() {
     if (this.eventEmitter) {
-      const listeners = this.eventEmitter.listenerCount;
-      const eventNames = this.eventEmitter.eventNames;
-      return `Current listener counter: ${listeners}. Event names: ${eventNames}`;
+      const listeners = this.eventEmitter.listeners("change");
+      const eventNames = this.eventEmitter.eventNames();
+      return `Current listener counter: ${listeners.length}. Event names: ${eventNames}`;
     }
   }
 
