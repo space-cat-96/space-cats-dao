@@ -25,6 +25,11 @@ app.get("/posts", (req: Request, res: Response) => {
   res.json(posts);
 });
 
+app.get("/debug", (req: Request, res: Response) => {
+  const msg = ReadWriteService.debug();
+  res.send(msg);
+});
+
 const launch = async () => {
   // Setup web socket for client/server communication
   const io: Socket = require("socket.io")(server, {

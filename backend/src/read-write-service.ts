@@ -82,6 +82,14 @@ export class ReadWriteService {
     return this.posts;
   }
 
+  debug() {
+    if (this.eventEmitter) {
+      const listeners = this.eventEmitter.listenerCount;
+      const eventNames = this.eventEmitter.eventNames;
+      return `Current listener counter: ${listeners}. Event names: ${eventNames}`;
+    }
+  }
+
   initializePosts = async () => {
     this.posts = await this.fetchAndCachePostHistory();
     this.validatePostHistory();
